@@ -1,0 +1,12 @@
+{
+    "name": "PdfBrowserKit",
+    "alias": "pdfbrowserkit",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}
