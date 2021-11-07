@@ -20,21 +20,17 @@ class PdfBrowserKitService implements PdfContract
 
     protected string $filename;
     protected array $params = [];
-    protected array $params_browser = [];
 
 
     public function getContentPdf(): string
     {
         $browserFactory = new BrowserFactory(config("pdfbrowserkit.binary"));
-        $browser = $browserFactory->createBrowser(array_merge(config('pdfbrowserkit.params_browser') ?? [], $this->params_browser));
+        $browser = $browserFactory->createBrowser();
 
         $this->path = storage_path('app').uniqid('pdf_', true).'.pdf';
 
         try {
             $page = $browser->createPage();
-            $width = 1920;
-            $height = 1000;
-            $page->setViewport($width, $height)->await(); // wait for operation to complete
             if(!empty($this->url)){
                 $page->navigate($this->url)->waitForNavigation();
                 $options = array_merge(config('pdfbrowserkit.params') ?? [], $this->params);
@@ -78,13 +74,6 @@ class PdfBrowserKitService implements PdfContract
     public function setParams(array $params = []): PdfContract
     {
         $this->params = $params;
-
-        return $this;
-    }
-
-    public function setParamsBrowser(array $paramsBrowser = []): PdfContract
-    {
-        $this->params_browser = $paramsBrowser;
 
         return $this;
     }
