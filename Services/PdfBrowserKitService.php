@@ -34,7 +34,7 @@ class PdfBrowserKitService implements PdfContract
             if(!empty($this->url)){
                 $page->navigate($this->url)->waitForNavigation();
                 $options = array_merge(config('pdfbrowserkit.params') ?? [], $this->params);
-                $page->pdf($options)->saveToFile($this->path);
+                $page->pdf($options)->saveToFile($this->path); 
             }else{
 
             }
