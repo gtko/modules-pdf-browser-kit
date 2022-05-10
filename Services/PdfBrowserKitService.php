@@ -34,11 +34,11 @@ class PdfBrowserKitService implements PdfContract
             $page = $browser->createPage();
             $width = 1920;
             $height = 1000;
-            $page->setViewport($width, $height)->await(); // wait for operation to complete
+            $page->setViewport($width, $height)->await(60000); // wait for operation to complete
             if(!empty($this->url)){
                 $page->navigate($this->url)->waitForNavigation();
                 $options = array_merge(config('pdfbrowserkit.params') ?? [], $this->params);
-                $page->pdf($options)->saveToFile($this->path); 
+                $page->pdf($options)->saveToFile($this->path, 60000);
             }else{
 
             }
